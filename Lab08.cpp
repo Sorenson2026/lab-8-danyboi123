@@ -12,29 +12,35 @@ int main()
 {
 	//define variables
 	int num, numCount = 0, count, max = 0, min = 0, runTot = 0;
+	char again;
 	float average;
 
 	//greeting
 	cout << "This program counts inputs and finds: min, max, and average (inputs should integers 1 through 10, 0 to quit)" << endl;
 
-	//get first integer validate answer
+	
 	do
 	{
-		cout << "Enter an integer (0 to quit): ";
-		cin >> num;
+		//get first integer validate answer
+		do
+		{
+			cout << "Enter an integer (0 to quit): ";
+			cin >> num;
 
-		if (num > 10 || num < 0)
-			cout << "invalid!" << endl;
+			if (num > 10 || num < 0)
+				cout << "invalid!" << endl;
 
-	} while (num > 10 || num < 0);
+		} while (num > 10 || num < 0);
 
-	//running total for average and numCount increment.
-	if (num != 0)
-	{
-		runTot += num;
-		numCount++;
-		max = min = num;
-	}
+		//running total for average and numCount increment.
+		if (num != 0)
+		{
+			runTot += num;
+			numCount++;
+
+			//new max min
+			max = min = num;
+		}
 
 		//loop to check for quit sentinel and get new integers
 		while (num != 0)
@@ -73,6 +79,13 @@ int main()
 		//output count, min, max, average
 		cout << "Count Min  Max  Average" << endl;
 		cout << setw(6) << left << numCount << setw(5) << left << min << setw(5) << left << max << setprecision(2) << average;
+		cout << endl << endl;
+
+		//ask to repeat program
+		cout << "Want to do it again?(Y/N): ";
+		cin >> again;
+
+	} while (again == 'y' || again == 'Y');
 
 	return 0;
 }
