@@ -15,12 +15,19 @@ int main()
 	float average;
 
 	//greeting
-	cout << "Enter numbers 1 through 10 for: amount entered, min, max, and average" << endl;
+	cout << "This program counts inputs and finds: min, max, and average (inputs should integers 1 through 10, 0 to quit)" << endl;
 
-	//get first integer
-	cout << "Enter an integer (0 to quit): ";
-	cin >> num;
-	
+	//get first integer validate answer
+	do
+	{
+		cout << "Enter an integer (0 to quit): ";
+		cin >> num;
+
+		if (num > 10 || num < 0)
+			cout << "invalid!" << endl;
+
+	} while (num > 10 || num < 0);
+
 	//running total for average and numCount increment.
 	if (num != 0)
 	{
@@ -28,37 +35,44 @@ int main()
 		numCount++;
 		max = min = num;
 	}
-	
-	//loop to check for quit sentinel and get new integers
-	while (num != 0)
-	{
-		cout << "Enter another integer (0 to quit): ";
-		cin >> num;
-		
-		//set new maxes and mins
-		if (num > max)
-			max = num;
-		else if (num < min && num != 0)
-			min = num;
 
-		//running total for average and numCount increment.
-		if (num != 0)
+		//loop to check for quit sentinel and get new integers
+		while (num != 0)
 		{
-			runTot += num;
-			numCount++;
+			do
+			{
+				//get next integer
+				cout << "Enter another integer (0 to quit): ";
+				cin >> num;
+
+				if (num > 10 || num < 0)
+					cout << "invalid!" << endl;
+
+			} while (num > 10 || num < 0);
+			//set new maxes and mins
+			if (num > max)
+				max = num;
+			else if (num < min && num != 0)
+				min = num;
+
+			//running total for average and numCount increment.
+			if (num != 0)
+			{
+				runTot += num;
+				numCount++;
+			}
 		}
-	}
-	//calculate average
-	average = static_cast<float>(runTot) / numCount;
-	cout << endl;
+		//calculate average
+		average = static_cast<float>(runTot) / numCount;
+		cout << endl;
 
-	//prevent divide by 0 error
-	if (numCount == 0)
-		average = 0;
+		//prevent divide by 0 error
+		if (numCount == 0)
+			average = 0;
 
-	//output count, min, max, average
-	cout << "Count Min  Max  Average" << endl;
-	cout << setw(6) << left << numCount << setw(5) << left << min << setw(5) << left << max << setprecision(2) << average;
+		//output count, min, max, average
+		cout << "Count Min  Max  Average" << endl;
+		cout << setw(6) << left << numCount << setw(5) << left << min << setw(5) << left << max << setprecision(2) << average;
 
 	return 0;
 }
